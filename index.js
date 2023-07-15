@@ -17,6 +17,9 @@ app.get("/blog",(req,res)=>{
 app.get("/contact",(req,res)=>{
     res.sendFile(`${__dirname}/pages/contact.html`);
 })
+app.get("/about-us",(req,res)=>{
+    app.sendFile(`${__dirname}/pages/about-us.html`);
+})
 
 app.listen(3000,()=>{
     console.log("This is running on port 3000.");
