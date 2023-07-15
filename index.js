@@ -11,6 +11,9 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get("/reservation",(req,res)=>{
+    res.sendFile(`${__dirname}/pages/reservation.html`);
+})
 app.get("/rooms",(req,res)=>{
     res.sendFile(`${__dirname}/pages/rooms.html`);
 })
@@ -22,6 +25,7 @@ app.get("/contact",(req,res)=>{
 })
 app.get("/about-us",(req,res)=>{
     app.sendFile(`${__dirname}/pages/about-us.html`);
+
 })
 
 app.listen(3000,()=>{
