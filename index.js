@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get("/reservation",(req,res)=>{
+    res.sendFile(`${__dirname}/pages/reservation.html`);
+})
+
 app.get("/rooms",(req,res)=>{
     res.sendFile(`${__dirname}/pages/rooms.html`);
 })
