@@ -26,6 +26,7 @@ app.get("/contact",(req,res)=>{
 })
 app.get("/about-us",(req,res)=>{
     app.sendFile(`${__dirname}/pages/about-us.html`);
+
 })
 
 app.listen(3000,()=>{
