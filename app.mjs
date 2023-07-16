@@ -1,15 +1,14 @@
 //jshint esversion:6
 
-const express = require("express");
+import express from 'express';
+import { index } from './controller/index.js';
 
 const app = express();
 
 app.use(express.static('public'))
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.get('/', index);
 
 app.get('/rooms', (req, res) => {
     res.render('rooms');
@@ -32,7 +31,7 @@ app.get('/reservation', (req, res) => {
 });
 
 app.get('/reservation-summary', (req, res) => {
-    res.render('reservation-summary');
+    res.render('reservation_summary');
 });
 
 app.listen(3000,()=>{

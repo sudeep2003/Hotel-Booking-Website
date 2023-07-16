@@ -2,11 +2,12 @@
   "name": "sona-master",
   "version": "1.0.0",
   "description": "This is a CMD & hotel-travel management website",
-  "main": "index.js",
+  "main": "app.mjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node app.mjs",
+    "dev": "nodemon app.mjs"
   },
   "author": "Sudip & Ayushman",
   "license": "ISC",
