@@ -1,10 +1,21 @@
-function getFormData(req){
-    const firstName = req.body.first_name;
-    const lastName = req.body.last_name;
-    const email = req.body.email;
-    const phone = req.body.phone;
+// const express = require("express");
+import express from 'express';
 
-    return{firstName, lastName, email, phone};
+const app = express();
+
+export function reservation(req, res){
+
+    // const firstName = req.body.first_name;
+    // const lastName = req.body.last_name;
+    // const email = req.body.email;
+    // const phone = req.body.phone;
+
+    res.render('reservation',
+    // {
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     phone
+    // }
+    );
 }
-
-module.exports = getFormData;

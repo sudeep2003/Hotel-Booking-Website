@@ -2,6 +2,7 @@
 
 import express from 'express';
 import { index } from './controller/index.js';
+import { reservation } from './controller/reservation.js';
 
 const app = express();
 
@@ -26,9 +27,7 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/reservation', (req, res) => {
-    res.render('reservation');
-});
+app.get('/reservation', reservation);
 
 app.get('/reservation-summary', (req, res) => {
     res.render('reservation_summary');
