@@ -31,6 +31,10 @@ app.get('/reservation', (req, res) => {
     res.render('reservation');
 });
 
+app.get('/reservation-summary', (req, res) => {
+    res.render('reservation-summary');
+});
+
 app.listen(3000,()=>{
     console.log("This is running on port 3000.");
 })
