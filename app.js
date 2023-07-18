@@ -2,6 +2,7 @@
 
 import express from 'express';
 import { index } from './controller/index.js';
+import { post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
@@ -13,6 +14,7 @@ app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true, 
 app.set('view engine', 'ejs');
 
 app.get('/', index);
+app.post('/', post_index);
 
 app.get('/rooms', (req, res) => {
     res.render('rooms');
