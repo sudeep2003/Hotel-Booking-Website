@@ -13,12 +13,7 @@ export function reservation(req, res){
     }
 
     req.session.reservationData=reservationData;
-    res.render('reservation',
-    // {
-    //     firstName,
-    //     lastName,
-    //     email,
-    //     phone
-    // }
-    );
+    console.log(reservationData);
+
+    res.render('reservation');
 }

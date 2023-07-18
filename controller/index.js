@@ -9,9 +9,9 @@ const app = express();
 export function index(req, res) {
   const check_in = req.body.check_in;
   const check_out = req.body.check_out;
-
-  req.session.check_in = check_in
-  req.session.check_out = check_out
-
+  
+  req.session.check_in = check_in;
+  req.session.check_out = check_out;
+  
   res.render('index');
 }
