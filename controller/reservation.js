@@ -5,6 +5,10 @@ import session from 'express-session';
 const app = express();
 
 export function reservation(req, res){
+    res.render('reservation');
+}
+
+export function post_reservation(req, res){
     const reservationData = {
         "firstName":req.body.firstName,
         "lastName":req.body.lastName,
@@ -13,7 +17,4 @@ export function reservation(req, res){
     }
 
     req.session.reservationData=reservationData;
-    console.log(reservationData);
-
-    res.render('reservation');
 }
