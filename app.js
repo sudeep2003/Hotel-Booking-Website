@@ -1,10 +1,10 @@
 //jshint esversion:6
 
 import express from 'express';
-import { index } from './controller/index.js';
-import { post_index } from './controller/index.js';
+import { index, post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { post_reservation, reservation } from './controller/reservation.js';
 
 const app = express();
 
@@ -32,9 +32,8 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/reservation', (req, res) => {
-    res.render('reservation');
-});
+app.get('/', reservation);
+app.post('/', post_reservation);
 
 app.get('/reservation-summary', (req, res) => {
     res.render('reservation_summary');
