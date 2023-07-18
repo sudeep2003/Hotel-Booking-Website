@@ -1,15 +1,18 @@
 // const express = require("express");
 import express from 'express';
+import session from 'express-session';
 
 const app = express();
 
 export function reservation(req, res){
+    const reservationData = {
+        "firstName":req.body.firstName,
+        "lastName":req.body.lastName,
+        "email":req.body.email,
+        "phone":req.body.phone
+    }
 
-    // const firstName = req.body.first_name;
-    // const lastName = req.body.last_name;
-    // const email = req.body.email;
-    // const phone = req.body.phone;
-
+    req.session.reservationData=reservationData;
     res.render('reservation',
     // {
     //     firstName,

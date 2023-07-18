@@ -3,6 +3,7 @@
 import express from 'express';
 import { index } from './controller/index.js';
 import { reservation } from './controller/reservation.js';
+import session from 'express-session';
 
 const app = express();
 
@@ -30,7 +31,8 @@ app.get('/about-us', (req, res) => {
 app.get('/reservation', reservation);
 
 app.get('/reservation-summary', (req, res) => {
-    res.render('reservation_summary');
+    const reservationData=req.session.reservationData;
+    res.render('reservation_summary',{reservationData});
 });
 
 app.listen(3000,()=>{
