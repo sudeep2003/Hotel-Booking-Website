@@ -2,10 +2,14 @@
 
 import express from 'express';
 import { index } from './controller/index.js';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 const app = express();
 
 app.use(express.static('public'))
+app.use(cookieParser());
+app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true, cookie: { secure: true }}));
 app.set('view engine', 'ejs');
 
 app.get('/', index);
