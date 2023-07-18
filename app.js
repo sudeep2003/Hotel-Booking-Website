@@ -4,8 +4,6 @@ import express from 'express';
 import { index } from './controller/index.js';
 import { post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
-import { reservation } from './controller/reservation.js';
-
 import session from 'express-session';
 
 const app = express();
@@ -13,7 +11,6 @@ const app = express();
 app.use(express.static('public'))
 app.use(cookieParser());
 app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true, cookie: { secure: true }}));
-
 app.set('view engine', 'ejs');
 
 app.get('/', index);
@@ -35,11 +32,12 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/reservation', reservation);
+app.get('/reservation', (req, res) => {
+    res.render('reservation');
+});
 
 app.get('/reservation-summary', (req, res) => {
-    const reservationData=req.session.reservationData;
-    res.render('reservation_summary',{reservationData});
+    res.render('reservation_summary');
 });
 
 app.listen(3000,()=>{

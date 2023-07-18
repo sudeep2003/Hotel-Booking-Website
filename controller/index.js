@@ -17,6 +17,4 @@ export function post_index(req, res) {
 
   req.session.check_in = check_in
   req.session.check_out = check_out
-
-  res.render('index');
 }
