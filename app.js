@@ -1,10 +1,23 @@
 //jshint esversion:6
+//Dotenv
+import dotenv from "dotenv";
+dotenv.config();
 
 import express from 'express';
 import { index, post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { post_reservation, reservation } from './controller/reservation.js';
+import mongoose from 'mongoose';
+// const mongoose = require('mongoose');
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('{process.env.DATABASE_ADDRESS}');
+
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+}
 
 const app = express();
 
@@ -32,13 +45,25 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/', reservation);
-app.post('/', post_reservation);
+app.get('/reservation', reservation);
+app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', (req, res) => {
-    res.render('reservation_summary');
+    const reservationData = req.session.reservationData;
+    console.log(reservationData);
+    const firstName= reservationData.firstName;
+    const lastName = reservationData.lastName;
+    const Name= firstName.concat(' ',lastName);
+    const emailId = reservationData.email;
+    const Phone = reservationData.Phone;
+
+    const Room = "Family-room";
+    const arrivalTime = 19;
+    const Departure = 20;
+    res.render('reservation_summary',{name:Name, emailid:emailId,phno:Phone});
 });
 
 app.listen(3000,()=>{
     console.log("This is running on port 3000.");
+    console.log("This is "+{process.env.A});
 })
