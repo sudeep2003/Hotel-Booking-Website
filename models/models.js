@@ -2,7 +2,7 @@ import express from 'express';
 
 // <-- Adding Mongodb -->
 
-import mongoose, { Mongoose } from 'mongoose';
+import mongoose, { Mongoose, Schema } from 'mongoose';
 // const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
@@ -33,17 +33,17 @@ const RestrictionSchema = new mongoose.Schema({
     updatedAt: Date
 })
 
-const reservationSchema = new mongoose.Schema({
+const ReservationSchema = new mongoose.Schema({
     firstName:String,
     lastName: String,
     email: String,
-    Phone: String,
+    phone: String,
     startDate: Date,
     endDate: Date,
     roomId: Number,
     createdAt: Date,
     updatedAt: Date,
-    Room: Room,
+    room: { type: Schema.Types.ObjectId, ref:'Room'},
 })
 
 const RoomRestrictionSchema= new mongoose.Schema({
@@ -54,14 +54,14 @@ const RoomRestrictionSchema= new mongoose.Schema({
     restrictionId: Number,
     createdAt: Date,
     updatedAt: Date,
-    Room: Room,
-    reservation: reservation,
-    restriction: restriction,
+    room: { type:Schema.Types.ObjectId, ref:'Room'},
+    reservation: { type:Schema.Types.ObjectId, ref:'Reservation'},
+    restriction: { type:Schema.Types.ObjectId, ref:'Restriction'},
 })
 
 const User = mongoose.model('User', UserSchema);
 const Room = mongoose.model('Room',RoomSchema);
-const Reservation = mongoose.model('Reservation', reservationSchema);
+const Reservation = mongoose.model('Reservation', ReservationSchema);
 const RoomRestriction = mongoose.model('RoomRestriction',RoomRestrictionSchema);
 
 //<-- End Mongodb -->
