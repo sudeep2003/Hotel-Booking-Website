@@ -8,6 +8,7 @@ import { index, post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { post_reservation, reservation } from './controller/reservation.js';
+import { summary } from "./controller/summary.js";
 
 const app = express();
 
@@ -38,21 +39,9 @@ app.get('/about-us', (req, res) => {
 app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
-app.get('/reservation-summary', (req, res) => {
-    const reservationData = req.session.reservationData;
-    console.log(reservationData);
-    const firstName= reservationData.firstName;
-    const lastName = reservationData.lastName;
-    const Name= firstName.concat(' ',lastName);
-    const emailId = reservationData.email;
-    const Phone = reservationData.Phone;
-
-    const Room = "Family-room";
-    const arrivalTime = 19;
-    const Departure = 20;
-    res.render('reservation_summary',{name:Name, emailid:emailId,phno:Phone});
-});
+app.get('/reservation-summary', summary);
 
 app.listen(3000,()=>{
     console.log("This is running on port 3000.");
+    alert("This is .")
 })
