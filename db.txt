@@ -1,0 +1,53 @@
+type
+  # User is the user model
+  User* = object
+    id*: int
+    firstName*: string
+    lastName*: string
+    email*: string
+    password*: string
+    createdAt*: string
+    updatedAt*: string
+    accessLevel*: int
+
+  # Room is the rooms model
+  Room* = object
+    id*: int
+    roomName*: string
+    createdAt*: DateTime
+    updatedAt*: DateTime
+
+  # Restriction is the restrictions model
+  Restriction* = object
+    id*: int
+    restrictionName*: string
+    cratedAt*: DateTime
+    updatedAt*: DateTime
+
+  # Reservation is the reservations model
+  Reservation* = object
+    id*: int
+    firstName*: string
+    lastName*: string
+    email*: string
+    phone*: string
+    startDate*: DateTime
+    endDate*: DateTime
+    roomID*: int
+    cratedAt*: DateTime
+    updatedAt*: DateTime
+    room*: Room
+
+  # RoomRestriction is the room_restrictions model
+  RoomRestriction* = object
+    id*: int
+    startDate*: DateTime
+    endDate*: DateTime
+    roomID*: int
+    reservationID*: int64
+    restrictionID*: int
+    createdAt*: DateTime
+    updatedAt*: DateTime
+    room*: Room
+    reservation*: Reservation
+    restriction*: Restriction
