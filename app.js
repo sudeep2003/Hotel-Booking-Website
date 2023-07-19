@@ -1,7 +1,7 @@
 //jshint esversion:6
 //Dotenv
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 import express from 'express';
 import { index, post_index } from './controller/index.js';
@@ -17,7 +17,7 @@ import mongoose, { Mongoose } from 'mongoose';
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('{process.env.DATABASE_ADDRESS}');
+//   await mongoose.connect('{process.env.DATABASE_ADDRESS}');
 }
 
 const UserSchema = new mongoose.Schema({
@@ -52,7 +52,7 @@ const reservationSchema = new mongoose.Schema({
     roomId: Number,
     createdAt: Date,
     updatedAt: Date,
-    Room: Room,
+    // Room: Room,
 })
 
 const RoomRestrictionSchema= new mongoose.Schema({
@@ -63,9 +63,9 @@ const RoomRestrictionSchema= new mongoose.Schema({
     restrictionId: Number,
     createdAt: Date,
     updatedAt: Date,
-    Room: Room,
-    reservation: reservation,
-    restriction: restriction,
+    // Room: Room,
+    // reservation: reservation,
+    // restriction: restriction,
 })
 
 const User = mongoose.model('User', UserSchema);
@@ -122,5 +122,5 @@ app.get('/reservation-summary', (req, res) => {
 
 app.listen(3000,()=>{
     console.log("This is running on port 3000.");
-    console.log("This is "+{process.env.A});
+    // console.log("This is "+{process.env.A});
 })
