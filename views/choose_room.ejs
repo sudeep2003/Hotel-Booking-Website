@@ -1,0 +1,16 @@
+<%- include("./partial/header") %>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>Choose a room</h1>
+  
+        <ul>
+          # for _, room in td:
+            <li><a href="/choose-room/${room[0]}" class="link-primary">${room[1]}</a></li>
+          # end for
+        </ul>
+      </div>
+    </div>
+  </div>
+<%- include("./partial/footer") %>
+  
