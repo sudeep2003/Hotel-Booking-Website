@@ -32,8 +32,8 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/', reservation);
-app.post('/', post_reservation);
+app.get('/reservation', reservation);
+app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', (req, res) => {
     res.render('reservation_summary');
