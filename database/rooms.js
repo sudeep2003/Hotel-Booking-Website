@@ -4,10 +4,19 @@ import {Room} from '../models/models'
 
 const app = express();
 
-const room = new Room({
-    roomName:String,
-    createdAt: Date,
-    updatedAt:Date,
-});
+const rooms = [
+    new Room({roomName:"Premium King Room"}),
+    new Room({roomName:"Deluxe Room"}),
+    new Room({roomName:"Double Room"}),
+    new Room({roomName:"Luxury Room"}),
+    new Room({roomName:"Room With View"}),
+    new Room({roomName:"Small View"})
+];
 
-await room.save();
+Room.insertMany(rooms, (error, docs) => {
+    if (error) {
+        console.log(error);
+    } else {
+        console.log("Succed");
+    }
+});
