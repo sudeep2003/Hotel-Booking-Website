@@ -4,11 +4,19 @@ import session from 'express-session';
 
 const app = express();
 
-export function reservation(req, res){
-    const startDate = req.session.check_in;
-    const endDate = req.session.check_out;
+app.use(session({
+    secret: 'random_string',
+    resave: false,
+    saveUninitialized: true,
+  }));
 
-    res.render('reservation', {startDate: startDate, endDate: endDate});
+export function reservation(req, res){
+    const sessionData = req.session
+
+    const startDate = String(sessionData.check_in);
+    const endDate = String(sessionData.check_out);
+
+    res.render('reservation', {startDate, endDate});
 }
 
 export function post_reservation(req, res){
