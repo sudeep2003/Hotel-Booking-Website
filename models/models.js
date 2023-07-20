@@ -62,6 +62,9 @@ const RoomRestrictionSchema= new mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 const Room = mongoose.model('Room',RoomSchema);
 const Reservation = mongoose.model('Reservation', ReservationSchema);
+const Restriction = mongoose.model('Restriction',RestrictionSchema);
 const RoomRestriction = mongoose.model('RoomRestriction',RoomRestrictionSchema);
+
+export { User, Room, Reservation, Restriction, RoomRestriction };
 
 //<-- End Mongodb -->
