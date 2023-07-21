@@ -8,7 +8,7 @@ import mongoose, { Mongoose, Schema } from 'mongoose';
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('{process.env.DATABASE_ADDRESS}');
+  await mongoose.connect(process.env.DATABASE_ADDRESS);
 }
 
 const UserSchema = new mongoose.Schema({

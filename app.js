@@ -43,6 +43,6 @@ app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
 })
