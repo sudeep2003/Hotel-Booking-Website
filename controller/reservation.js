@@ -10,22 +10,45 @@ app.use(session({
     saveUninitialized: true,
   }));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 export function reservation(req, res){
-    const sessionData = req.session
+    // const sessionData = req.session
 
-    const startDate = String(sessionData.check_in);
-    const endDate = String(sessionData.check_out);
+    var startDate = req.session.check_in;
+    var endDate = req.session.check_out;
 
-    res.render('reservation', {startDate, endDate});
+    console.log(startDate);
+
+    res.render('reservation', {
+        startDate: startDate,
+        endDate: endDate
+    });
 }
 
 export function post_reservation(req, res){
     const reservationData = {
-        "firstName":req.body.firstName,
-        "lastName":req.body.lastName,
-        "email":req.body.email,
-        "phone":req.body.phone
+        "firstName":toString(req.body.first_name),
+        "lastName":toString(req.body.last_name),
+        "email":toString(req.body.email),
+        "phone":toString(req.body.phone)
     }
 
-    req.session.reservationData=reservationData;
+    // const reservationData = {
+    // const firstName=toString(req.body.first_name);
+    // const lastName=toString(req.body.last_name);
+    // const email=toString(req.body.email);
+    // const phone=toString(req.body.phone);
+    // }
+
+    const sessionData = req.session;
+
+    // sessionData.firstName = firstName;
+    // sessionData.lastName=lastName;
+    // sessionData.email=email;
+    // sessionData.phone=phone;
+    sessionData.reservationData=reservationData;
+
+    // res.redirect('/reservation-summary');
 }
