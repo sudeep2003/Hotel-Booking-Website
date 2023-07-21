@@ -17,6 +17,6 @@ Room.insertMany(rooms, (error, docs) => {
     if (error) {
         console.log(error);
     } else {
-        console.log("Succed");
+        console.log(docs);
     }
 });
