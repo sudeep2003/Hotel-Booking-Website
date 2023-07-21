@@ -16,7 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 export function reservation(req, res){
     // const sessionData = req.session
 
-    var startDate = req.session.check_in;
+    var s = req.session.check_in;
+    var startDate = toString(s);
     var endDate = req.session.check_out;
 
     console.log(startDate);
