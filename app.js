@@ -7,20 +7,16 @@ import express from 'express';
 import { index, post_index } from './controller/index.js';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import session from 'express-session';
 import { post_reservation, reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
 
 const app = express();
 
-// app.use(bodyParser.urlencoded({extended: false}))
-// app.use(bodyParser.json())
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('public'))
 app.use(cookieParser());
-app.use(session({secret: process.env.SECRET, resave: true, saveUninitialized: true, cookie: { secure: true }}));
 app.set('view engine', 'ejs');
 
 app.get('/', index);
