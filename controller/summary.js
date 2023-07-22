@@ -14,5 +14,5 @@ export function summary(req, res){
     const Room = "Family-room";
     const arrivalTime = 19;
     const Departure = 20;
-    res.render('reservation_summary',{name:Name, emailid:emailId,phno:Phone});
+    res.render('reservation-summary',{name:Name, emailid:emailId,phno:Phone});
 }
