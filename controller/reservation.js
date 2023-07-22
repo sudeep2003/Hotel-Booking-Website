@@ -24,10 +24,25 @@ export function reservation(req, res){
 
 export function post_reservation(req, res){
     const reservationData = {
-        "firstName":toString(req.body.first_name),
-        "lastName":toString(req.body.last_name),
-        "email":toString(req.body.email),
-        "phone":toString(req.body.phone)
+        "firstName":req.body.first_name,
+        "lastName":req.body.last_name,
+        "email":req.body.email,
+        "phone":req.body.phone
     }
-    res.redirect('/reservation-summery')
+
+    // const firstName=req.body.first_name;
+    // const lastName=req.body.last_name;
+    // const email=req.body.email;
+    // const phone=req.body.phone;
+
+    req.session.reservationData = reservationData;
+
+    // console.log(firstName,lastName,email,phone)
+
+    // req.session.firstName = firstName;
+    // req.session.lastName = lastName;
+    // req.session.email = email;
+    // req.session.phone = phone;    
+
+    res.redirect('/reservation-summary')
 }
