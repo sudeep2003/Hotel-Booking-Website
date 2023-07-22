@@ -4,19 +4,23 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express from 'express';
-import { index, post_index } from './controller/index.js';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import { post_reservation, reservation } from './controller/reservation.js';
+import { index, post_index } from './controller/index.js';
+import { reservation, post_reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
+import session from "express-session";
 
 const app = express();
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }))
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 app.use(express.static('public'))
-app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 app.get('/', index);
