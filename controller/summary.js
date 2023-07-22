@@ -5,15 +5,6 @@ const app = express();
 export function summary(req, res){
     console.log(req.session);
     const reservationData = req.session.reservationData;
-    // console.log(reservationData);
-
-    // const firstName = req.session.firstName;
-
-    // const firstName= req.session.firstName;
-    // const lastName = req.session.lastName;
-    // const Name = `${firstName} ${lastName}`;
-    // const email = req.session.email;
-    // const Phone = req.session.phone;
 
     const firstName= reservationData.firstName;
     const lastName = reservationData.lastName;
