@@ -5,9 +5,9 @@
         <h1>Choose a room</h1>
   
         <ul>
-          # for _, room in td:
-            <li><a href="/choose-room/${room[0]}" class="link-primary">${room[1]}</a></li>
-          # end for
+          <% for(var a = 0; a<rooms.length; a++) { %>
+            <li><a href="/choose-room/<%= rooms[a] %>" class="link-primary"><%= rooms[a] %></a></li>
+          <% } %>
         </ul>
       </div>
     </div>

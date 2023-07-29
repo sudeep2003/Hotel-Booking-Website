@@ -4,19 +4,35 @@ import {Room} from '../models/models'
 
 const app = express();
 
-const rooms = [
-    new Room({roomName:"Premium King Room"}),
-    new Room({roomName:"Deluxe Room"}),
-    new Room({roomName:"Double Room"}),
-    new Room({roomName:"Luxury Room"}),
-    new Room({roomName:"Room With View"}),
-    new Room({roomName:"Small View"})
-];
+export default async function availableRooms(arrivalDate, departureDate){
 
-Room.insertMany(rooms, (error, docs) => {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log(docs);
+    const Rooms_type = {
+        "Premium King Room": 1,
+        "Deluxe Room": 1,
+        "Double Room": 1,
+        "Luxury Room": 1,
+        "Room With View": 1,
+        "Small View": 1
+    };
+
+    console.log(Rooms_type)
+
+    const UnavailableRooms = await Room.find({
+        unavailableFrom: { $gte: arrivalDate },
+        unavailableTo: { $lte: departureDate }
+    });
+
+    for (const room of UnavailableRooms) {
+        Rooms_type[room.roomName]--;
     }
-});
+
+    for (const key in Rooms_type) {
+        if (Rooms_type[key] <= 0) {
+            delete Rooms_type[key];
+        }
+    }
+
+    const Rooms_array = Object.keys(Rooms_type);
+
+    return Rooms_array;
+}
