@@ -6,7 +6,7 @@ import session from 'express-session';
 const app = express();
 
 const user = new User({
-    firstName: 
+    firstName: String,
     lastName: String,
     email: String,
     password: String,
