@@ -3,9 +3,12 @@ import express from 'express';
 // <-- Adding Mongodb -->
 
 import mongoose, { Mongoose, Schema } from 'mongoose';
+import dotenv from 'dotenv';
 // const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://Admin_sudip:eoJgIRhKIGSv8mQ2@cluster0.orm3dj3.mongodb.net/sonamasterdb"
+dotenv.config();
+
+const uri = process.env.DATABASE_ADDRESS;
 
 main().catch(err => console.log(err));
 
