@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import {Room} from '../models/models'
+import {Room} from '../models/models.js'
 
 const app = express();
 
@@ -33,6 +33,6 @@ export default async function availableRooms(arrivalDate, departureDate){
     }
 
     const Rooms_array = Object.keys(Rooms_type);
-
+    console.log(Rooms_array)
     return Rooms_array;
 }

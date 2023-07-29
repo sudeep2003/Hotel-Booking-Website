@@ -5,10 +5,15 @@ import express from 'express';
 import mongoose, { Mongoose, Schema } from 'mongoose';
 // const mongoose = require('mongoose');
 
+const uri = "mongodb+srv://Admin_sudip:eoJgIRhKIGSv8mQ2@cluster0.orm3dj3.mongodb.net/sonamasterdb"
+
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.DATABASE_ADDRESS);
+  await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 }
 
 const UserSchema = new mongoose.Schema({

@@ -1,4 +1,4 @@
-//jshint esversion:6
+//jshint esversion:7
 //Dotenv
 import dotenv from "dotenv";
 dotenv.config();
