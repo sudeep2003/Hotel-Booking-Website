@@ -2,6 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
+import roomRestrictionStore from '../database/roomrestrictions';
 
 const app = express();
 
@@ -14,7 +15,8 @@ export function reservation(req, res){
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
   
-    console.log(startDate);
+    console.log(startDate, endDate);
+    roomRestrictionStore(req);
   
     res.render('reservation', {
         startDate: startDate,
