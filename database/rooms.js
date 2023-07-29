@@ -4,10 +4,7 @@ import {Room} from '../models/models'
 
 const app = express();
 
-export default async function availableRooms(req){
-
-    const arrivalDate = req.session.check_in;
-    const departureDate = req.session.check_out;
+export default async function availableRooms(arrivalDate, departureDate){
 
     const Rooms_type = {
         "Premium King Room": 1,
