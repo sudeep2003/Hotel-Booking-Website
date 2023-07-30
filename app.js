@@ -2,6 +2,7 @@
 //Dotenv
 import dotenv from "dotenv";
 dotenv.config();
+import "https://deno.land/x/dotenv/mod.ts";
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -49,6 +50,6 @@ app.post('/reservation', post_reservation);
 app.get('/reservation-summary', summary);
 app.get('/choose_room/:id', choose_room);
 
-app.listen(parseInt(process.env.get('PORT')),()=>{
+app.listen(parseInt(Deno.env.get('PORT')),()=>{
     console.log("This is running on port 3000.");
 })
