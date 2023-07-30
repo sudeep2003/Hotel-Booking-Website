@@ -20,7 +20,8 @@ export default async function availableRooms(arrivalDate, departureDate){
     const UnavailableRooms = await Room.find({
         unavailableFrom: { $gte: arrivalDate },
         unavailableTo: { $lte: departureDate }
-    });
+    }).limit(100); // Adjust the limit as per your requirement
+     
 
     for (const room of UnavailableRooms) {
         Rooms_type[room.roomName]--;
