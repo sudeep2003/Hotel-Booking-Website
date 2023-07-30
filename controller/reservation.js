@@ -16,16 +16,16 @@ export function reservation(req, res){
     var endDate = req.session.check_out;
     var roomID = req.session.roomID;
     var roomName = roomNameByRoomID(roomID)
-  
+
     console.log(startDate, endDate);
     roomRestrictionStore(req);
-  
+
     res.render('reservation', {
         roomName: roomName,
         startDate: startDate,
         endDate: endDate
     });
-  }
+}
 
 export function post_reservation(req, res){
     const reservationData = {
