@@ -4,6 +4,7 @@ import {Room} from '../models/models.js'
 
 const app = express();
 
+
 export default function rooms_type(){
     return({
     "Premium King Room": 1,

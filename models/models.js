@@ -6,9 +6,11 @@ import mongoose, { Mongoose, Schema } from 'mongoose';
 import dotenv from 'dotenv';
 // const mongoose = require('mongoose');
 
+import "https://deno.land/x/dotenv/mod.ts";
+
 dotenv.config();
 
-const uri = process.env.DATABASE_ADDRESS;
+const uri = Deno.env.get('DATABASE_ADDRESS');
 
 main().catch(err => console.log(err));
 

@@ -14,11 +14,14 @@ export function reservation(req, res){
     console.log(req.session);
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
+    var roomID = req.session.roomID;
+    var roomName = roomNameByRoomID(roomID)
   
     console.log(startDate, endDate);
     roomRestrictionStore(req);
   
     res.render('reservation', {
+        roomName: roomName,
         startDate: startDate,
         endDate: endDate
     });
@@ -32,19 +35,29 @@ export function post_reservation(req, res){
         "phone":req.body.phone
     }
 
-    // const firstName=req.body.first_name;
-    // const lastName=req.body.last_name;
-    // const email=req.body.email;
-    // const phone=req.body.phone;
-
     req.session.reservationData = reservationData;
 
-    // console.log(firstName,lastName,email,phone)
-
-    // req.session.firstName = firstName;
-    // req.session.lastName = lastName;
-    // req.session.email = email;
-    // req.session.phone = phone;    
-
     res.redirect('/reservation-summary')
+}
+
+function roomNameByRoomID (id){
+    if (id = 1){
+        var roomName = 'Double Room';
+        return roomName;
+    } else if (id = 2) {
+        var roomName = 'Premium King Room';
+        return roomName;
+    } else if (id = 3) {
+        var roomName = 'Deluxe Room';
+        return roomName;
+    } else if (id = 4) {
+        var roomName = 'Family Room';
+        return roomName;
+    } else if (id = 5) {
+        var roomName = 'Room with View';
+        return roomName;
+    } else {
+        var roomName = 'Small View';
+        return roomName;
+    }
 }

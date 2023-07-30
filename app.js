@@ -1,13 +1,15 @@
-//jshint esversion:7
+//jshint esversion:6
 //Dotenv
 import dotenv from "dotenv";
 dotenv.config();
+import "https://deno.land/x/dotenv/mod.ts";
 
 import express from 'express';
 import bodyParser from 'body-parser';
 import { index, post_index } from './controller/index.js';
 import { reservation, post_reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
+import { choose_room } from "./controller/choose_room.js";
 import session from "express-session";
 
 const app = express();
@@ -46,7 +48,8 @@ app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
+app.get('/choose_room/:id', choose_room);
 
-app.listen(process.env.PORT,()=>{
+app.listen(parseInt(Deno.env.get('PORT')),()=>{
     console.log("This is running on port 3000.");
 })
