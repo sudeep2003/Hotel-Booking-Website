@@ -17,7 +17,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
-  }))
+}))
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
@@ -49,6 +50,6 @@ app.post('/reservation', post_reservation);
 app.get('/reservation-summary', summary);
 app.get('/choose_room/:id', choose_room);
 
-app.listen(parseInt(process.env.get('PORT')),()=>{
+app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
 })
