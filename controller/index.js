@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
-import availableRooms from '../database/rooms.js';
+import { availableRooms } from '../database/roomsAvailable.js';
+import rooms_type from '../database/rooms.js';
 
 const app = express();
 
