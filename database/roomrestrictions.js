@@ -4,7 +4,7 @@ import {RoomRestriction} from '../models/models.js'
 
 const app = express();
 
-export default async function roomRestrictionStore(req){
+export default async function roomRestrictionStore(startDate,endDate){
     const roomRestriction = new RoomRestriction({
         startDate: startDate,
         endDate: endDate,

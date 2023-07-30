@@ -18,7 +18,7 @@ export function reservation(req, res){
     var roomName = roomNameByRoomID(roomID)
 
     console.log(startDate, endDate);
-    roomRestrictionStore(req);
+    roomRestrictionStore(startDate,endDate);
 
     res.render('reservation', {
         roomName: roomName,
