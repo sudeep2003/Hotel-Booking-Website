@@ -6,6 +6,8 @@ export function summary(req, res){
     console.log(req.session);
     const reservationData = req.session.reservationData;
 
+    const roomName = req.session.roomName;
+
     const firstName= reservationData.firstName;
     const lastName = reservationData.lastName;
     const Name = `${firstName} ${lastName}`;
@@ -16,6 +18,7 @@ export function summary(req, res){
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
     res.render('reservation_summary',{
+        roomName: roomName,
         Name: Name,
         startDate: startDate,
         endDate: endDate,

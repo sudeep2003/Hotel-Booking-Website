@@ -2,7 +2,6 @@
 //Dotenv
 import dotenv from "dotenv";
 dotenv.config();
-import "https://deno.land/x/dotenv/mod.ts";
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -18,7 +17,8 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
-  }))
+}))
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
@@ -48,8 +48,8 @@ app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
-app.get('/choose_room/:id', choose_room);
+app.get('/choose-room/:id', choose_room);
 
-app.listen(parseInt(Deno.env.get('PORT')),()=>{
+app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
 })

@@ -6,19 +6,17 @@ import mongoose, { Mongoose, Schema } from 'mongoose';
 import dotenv from 'dotenv';
 // const mongoose = require('mongoose');
 
-import "https://deno.land/x/dotenv/mod.ts";
-
 dotenv.config();
 
-const uri = Deno.env.get('DATABASE_ADDRESS');
+const uri = process.env.DATABASE_ADDRESS;
 
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(uri, {
+    await mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
+    });
 }
 
 const UserSchema = new mongoose.Schema({
