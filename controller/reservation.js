@@ -15,7 +15,9 @@ export function reservation(req, res){
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
     var roomID = req.session.roomID;
-    var roomName = roomNameByRoomID(roomID)
+    console.log(roomID);
+    var roomName = roomNameByRoomID(roomID);
+    req.session.roomName = roomName;
 
     console.log(startDate, endDate);
     roomRestrictionStore(startDate,endDate);
@@ -40,20 +42,21 @@ export function post_reservation(req, res){
     res.redirect('/reservation-summary')
 }
 
-function roomNameByRoomID (id){
-    if (id = 1){
+function roomNameByRoomID (roomID){
+    var id = roomID;
+    if (id = 0){
         var roomName = 'Double Room';
         return roomName;
-    } else if (id = 2) {
+    } else if (id = 1) {
         var roomName = 'Premium King Room';
         return roomName;
-    } else if (id = 3) {
+    } else if (id = 2) {
         var roomName = 'Deluxe Room';
         return roomName;
-    } else if (id = 4) {
+    } else if (id = 3) {
         var roomName = 'Family Room';
         return roomName;
-    } else if (id = 5) {
+    } else if (id = 4) {
         var roomName = 'Room with View';
         return roomName;
     } else {

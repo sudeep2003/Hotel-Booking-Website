@@ -48,7 +48,7 @@ app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
-app.get('/choose_room/:id', choose_room);
+app.get('/choose-room/:id', choose_room);
 
 app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
