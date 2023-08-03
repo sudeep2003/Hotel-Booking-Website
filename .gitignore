@@ -2,5 +2,4 @@
 .env
 
 # Ignore node_modules directory
-node_modules/
-bun.lockb
+node_modules
