@@ -42,25 +42,25 @@ export function post_reservation(req, res){
     res.redirect('/reservation-summary')
 }
 
-function roomNameByRoomID (roomID){
-    var id = roomID;
-    if (id = 0){
-        var roomName = 'Double Room';
-        return roomName;
-    } else if (id = 1) {
-        var roomName = 'Premium King Room';
+function roomNameByRoomID (id){
+    // const id = roomID;
+    if (id = 1){
+        const roomName = 'Double Room';
         return roomName;
     } else if (id = 2) {
-        var roomName = 'Deluxe Room';
+        const roomName = 'Premium King Room';
         return roomName;
     } else if (id = 3) {
-        var roomName = 'Family Room';
+        const roomName = 'Deluxe Room';
         return roomName;
     } else if (id = 4) {
-        var roomName = 'Room with View';
+        const roomName = 'Family Room';
+        return roomName;
+    } else if (id = 5) {
+        const roomName = 'Room with View';
         return roomName;
     } else {
-        var roomName = 'Small View';
+        const roomName = 'Small View';
         return roomName;
     }
 }
