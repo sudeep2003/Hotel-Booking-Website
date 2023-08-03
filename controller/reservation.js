@@ -11,13 +11,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-export function reservation(req, res){
+export async function reservation(req, res){
     console.log(req.session);
     const startDate = req.session.check_in;
     const endDate = req.session.check_out;
     const roomID = req.session.roomID;
     console.log(roomID);
-    const roomName = roomNameByRoomID(roomID);
+    const roomName = await roomNameByRoomID(roomID);
+    console.log(roomName);
     req.session.roomName = roomName;
 
     console.log(startDate, endDate);

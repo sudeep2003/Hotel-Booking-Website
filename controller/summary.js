@@ -17,7 +17,14 @@ export function summary(req, res){
     const Room = "Family-room";
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
-    req.session.clear();
+    // req.session.clear();
+    req.session.destroy((err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Session is successfully destroyed.s");
+        }
+    })
     res.render('reservation_summary',{
         roomName: roomName,
         Name: Name,
