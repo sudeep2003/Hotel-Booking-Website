@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 const RoomSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     roomName:String,
     createdAt: Date,
     updatedAt:Date,
