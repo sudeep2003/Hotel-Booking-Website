@@ -5,8 +5,8 @@
         <h1>Choose a room</h1>
   
         <ul>
-          <% for(var a = 0; a<rooms.length; a++) { %>
-            <li><a href="/choose-room/<%= a %>" class="link-primary"><%= rooms[a] %></a></li>
+          <% for(let a = 0; a<rooms.length; a++) { %>
+            <li><a href="/choose-room/<%= rooms[a].room._id %>" class="link-primary"><%= rooms[a].room.roomName %></a></li>
           <% } %>
         </ul>
       </div>
