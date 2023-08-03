@@ -55,15 +55,42 @@ export async function availableSingleRoom(singleRoom,arrivalDate, departureDate)
     }
 }
 
-export async function availableRooms(arrivalDate, departureDate){
-    const roomsData = []
-    const Unavailable_RoomRestriction = await RoomRestriction.find({
+// export async function availableRooms(arrivalDate, departureDate){
+//     const Unavailable_RoomRestriction = await RoomRestriction.find({
+//         unavailableFrom: { $gte: arrivalDate },
+//         unavailableTo: { $lte: departureDate }
+//     });
+//     for (const roomRestriction of Unavailable_RoomRestriction) {
+//         console.log(roomRestriction.roomId);
+//         var roomsData = await Room.find({_id: {$ne: ObjectId(roomRestriction.roomId)}});
+//     }
+//     console.log(roomsData)
+//     return roomsData;
+// }
+
+export async function availableRooms(arrivalDate, departureDate) {
+let Unavailable_RoomRestriction;
+try {
+    Unavailable_RoomRestriction = await RoomRestriction.find({
         unavailableFrom: { $gte: arrivalDate },
         unavailableTo: { $lte: departureDate }
     });
-    for (const roomRestriction of Unavailable_RoomRestriction) {
-        roomsData = await Room.find({ _id: { $ne: roomRestriction.roomId } });
-    }
-    console.log(roomsData)
-    return roomsData;
+} catch (error) {
+    console.error('Error fetching unavailable rooms:', error);
+    throw error;
+}
+
+let roomsData = [];
+
+const roomIds = Unavailable_RoomRestriction.map((restriction) => restriction.roomId);
+
+try {
+    roomsData = await Room.find({ _id: { $nin: roomIds } });
+} catch (error) {
+    console.error('Error fetching available rooms:', error);
+    throw error;
+}
+
+console.log(roomsData);
+return roomsData;
 }
