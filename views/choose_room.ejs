@@ -5,12 +5,11 @@
         <h1>Choose a room</h1>
   
         <ul>
-          <% for(var a = 0; a<rooms.length; a++) { %>
-            <li><a href="/choose-room/<%= a %>" class="link-primary"><%= rooms[a] %></a></li>
-          <% } %>
+          <%rooms.map((room)=>{%>
+            <li><a href="/choose-room/<%= room._id %>" class="link-primary"><%= room.roomName %></a></li>
+          <% }) %>
         </ul>
       </div>
     </div>
   </div>
 <%- include("./partial/footer") %>
-  

@@ -1,7 +1,8 @@
 import { Room } from "../models/models.js";
 
 export default async function roomNameByRoomID (roomID){
-    const roomName = await Room.findById(roomID).exec();
-    console.log(roomName);
-    return roomName;
+    console.log(roomID);
+    const room = await Room.findById(roomID).exec();
+    console.log(room, room.roomName);
+    return room.roomName;
 }
