@@ -31,29 +31,29 @@ const app = express();
 //     return Rooms_array;
 // }
 
-export async function availableSingleRoom(singleRoom,arrivalDate, departureDate){
+// export async function availableSingleRoom(singleRoom,arrivalDate, departureDate){
 
-    const Rooms_type = rooms_type();
-    const Single_room = singleRoom;
+//     const Rooms_type = rooms_type();
+//     const Single_room = singleRoom;
 
-    console.log(Rooms_type, Single_room)
+//     console.log(Rooms_type, Single_room)
 
-    const availableSingleRoom = await Room.findOne({
-        roomName:Single_room,
-        availableFrom: { $gte: arrivalDate },
-        availableTo: { $lte: departureDate }
-    });
+//     const availableSingleRoom = await Room.findOne({
+//         roomName:Single_room,
+//         availableFrom: { $gte: arrivalDate },
+//         availableTo: { $lte: departureDate }
+//     });
     
-    if (availableSingleRoom) {
-        // Item is available within the specified date range
-        console.log(`${Single_room} is available.`);
-        return false;
-    } else {
-        // Item is not available within the specified date range
-        console.log(`${Single_room} is not available.`);
-        return true;
-    }
-}
+//     if (availableSingleRoom) {
+//         // Item is available within the specified date range
+//         console.log(`${Single_room} is available.`);
+//         return false;
+//     } else {
+//         // Item is not available within the specified date range
+//         console.log(`${Single_room} is not available.`);
+//         return true;
+//     }
+// }
 
 // export async function availableRooms(arrivalDate, departureDate){
 //     const Unavailable_RoomRestriction = await RoomRestriction.find({
@@ -69,28 +69,69 @@ export async function availableSingleRoom(singleRoom,arrivalDate, departureDate)
 // }
 
 export async function availableRooms(arrivalDate, departureDate) {
-let Unavailable_RoomRestriction;
-try {
-    Unavailable_RoomRestriction = await RoomRestriction.find({
-        unavailableFrom: { $gte: arrivalDate },
-        unavailableTo: { $lte: departureDate }
-    });
-} catch (error) {
-    console.error('Error fetching unavailable rooms:', error);
-    throw error;
+    let Unavailable_RoomRestriction;
+    try {
+        Unavailable_RoomRestriction = await RoomRestriction.find({
+            unavailableFrom: { $gte: arrivalDate },
+            unavailableTo: { $lte: departureDate }
+        });
+    } catch (error) {
+        console.error('Error fetching unavailable rooms:', error);
+        throw error;
+    }
+
+    let roomsData = [];
+
+    const roomIds = Unavailable_RoomRestriction.map((restriction) => restriction.roomId);
+
+    try {
+        roomsData = await Room.find({ _id: { $nin: roomIds } });
+    } catch (error) {
+        console.error('Error fetching available rooms:', error);
+        throw error;
+    }
+
+    console.log(roomsData);
+    return roomsData;
 }
 
-let roomsData = [];
+export async function availableSingleRoom(singleRoom,arrivalDate, departureDate){
 
-const roomIds = Unavailable_RoomRestriction.map((restriction) => restriction.roomId);
+    // const Rooms_type = rooms_type();
+    // const Single_room = singleRoom;
 
-try {
-    roomsData = await Room.find({ _id: { $nin: roomIds } });
-} catch (error) {
-    console.error('Error fetching available rooms:', error);
-    throw error;
-}
+    console.log(singleRoom)
 
-console.log(roomsData);
-return roomsData;
+    let UnavailableSingleRoom;
+    try{
+        UnavailableSingleRoom = await RoomRestriction.find({
+            roomName:singleRoom,
+            unavailableFrom: { $gte: arrivalDate },
+            unavailableTo: { $lte: departureDate }
+        });
+    }catch(err){
+        console.error('Error fetching unavailable rooms:', err);
+        throw err;
+    }
+
+    let SingleroomsData = [];
+    
+    const SingleroomIds = UnavailableSingleRoom.map((SingleRoom) => SingleRoom.roomId);
+
+    try {
+        SingleroomsData = await Room.find({ _id: { $nin: SingleroomIds } });
+    } catch (error) {
+        console.error('Error fetching available rooms:', error);
+        throw error;
+    }
+    
+    if (SingleroomsData.length > 0) {
+        // Item is available within the specified date range
+        console.log(`${singleRoom} is available.`);
+        return true;
+    } else {
+        // Item is not available within the specified date range
+        console.log(`${singleRoom} is not available.`);
+        return false;
+    }
 }
