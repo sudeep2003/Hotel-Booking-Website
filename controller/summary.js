@@ -14,7 +14,6 @@ export function summary(req, res){
     const email = reservationData.email;
     const Phone = reservationData.phone;
 
-    const Room = "Family-room";
     var startDate = req.session.check_in;
     var endDate = req.session.check_out;
     req.session.clear();
