@@ -4,17 +4,25 @@
 // dotenv.config();
 
 import express from 'express';
+import bodyParser from 'body-parser';
 import { index, post_index } from './controller/index.js';
-import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import { post_reservation, reservation } from './controller/reservation.js';
+import { reservation, post_reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
+import { choose_room } from "./controller/choose_room.js";
+import session from "express-session";
 
 const app = express();
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+
 app.use(express.static('public'))
-app.use(cookieParser());
-app.use(session({secret: "keyboard cat", resave: true, saveUninitialized: true, cookie: { secure: true }}));
 app.set('view engine', 'ejs');
 
 app.get('/', index);
@@ -40,8 +48,8 @@ app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
+app.get('/choose-room/:id', choose_room);
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
-    alert("This is .")
 })

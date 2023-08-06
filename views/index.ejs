@@ -151,10 +151,11 @@
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
                         <h3>Booking Your Hotel</h3>
-                        <form action="#" method="post" id="f1">
+                        <form action="/" method="post" id="f1">
+                            <label class="text-danger"><%= error %></label>
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in" name="check_in">
+                                <input type="text" class="date-input" id="date-in" name="start">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">

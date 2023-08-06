@@ -5,12 +5,11 @@
         <h1>Choose a room</h1>
   
         <ul>
-          # for _, room in td:
-            <li><a href="/choose-room/${room[0]}" class="link-primary">${room[1]}</a></li>
-          # end for
+          <%rooms.map((room)=>{%>
+            <li><a href="/choose-room/<%= room._id %>" class="link-primary"><%= room.roomName %></a></li>
+          <% }) %>
         </ul>
       </div>
     </div>
   </div>
 <%- include("./partial/footer") %>
-  

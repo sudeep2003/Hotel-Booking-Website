@@ -3,12 +3,20 @@ import express from 'express';
 // <-- Adding Mongodb -->
 
 import mongoose, { Mongoose, Schema } from 'mongoose';
+import dotenv from 'dotenv';
 // const mongoose = require('mongoose');
+
+dotenv.config();
+
+const uri = process.env.DATABASE_ADDRESS;
 
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('{process.env.DATABASE_ADDRESS}');
+    await mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    });
 }
 
 const UserSchema = new mongoose.Schema({
@@ -22,6 +30,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 const RoomSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     roomName:String,
     createdAt: Date,
     updatedAt:Date,
@@ -66,4 +75,5 @@ const Restriction = mongoose.model('Restriction',RestrictionSchema);
 const RoomRestriction = mongoose.model('RoomRestriction',RoomRestrictionSchema);
 
 export { User, Room, Reservation, Restriction, RoomRestriction };
+
 //<-- End Mongodb -->
