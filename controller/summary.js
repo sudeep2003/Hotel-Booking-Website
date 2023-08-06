@@ -1,5 +1,6 @@
 import express from 'express';
 import reservationDataBase from '../database/reservations.js';
+// import { res1 } from '../models/templateData.js';
 
 const app = express();
 
@@ -8,19 +9,20 @@ export function summary(req, res){
     const reservationData = req.session.reservationData;
 
     const roomName = req.session.roomName;
-
-    const firstName= reservationData.firstName;
-    const lastName = reservationData.lastName;
+    const res1 = {
+        "firstName": reservationData.firstName,
+        "lastName": reservationData.lastName,
+        "email": reservationData.email,
+        "Phone": reservationData.phone,
+        "startDate": reservationData.check_in,
+        "endDate": reservationData.check_out,
+        "roomID": reservationData.roomID
+    }
     const Name = `${firstName} ${lastName}`;
-    const email = reservationData.email;
-    const Phone = reservationData.phone;
-    const startDate = req.session.check_in;
-    const endDate = req.session.check_out;
-    const roomID = req.session.roomID;
 
     console.log(roomID);
 
-    reservationDataBase(firstName,lastName,email,Phone,startDate,endDate,roomID)
+    reservationDataBase(res1)
 
     req.session.destroy((err)=>{
         if(err){
