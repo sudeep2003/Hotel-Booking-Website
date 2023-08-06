@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import {Reservation} from '../models/models'
+import {Reservation} from '../models/models.js'
 // import { res1 } from '../models/templateData';
 
 const app = express();
