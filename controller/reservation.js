@@ -16,12 +16,9 @@ export async function reservation(req, res){
     const startDate = req.session.check_in;
     const endDate = req.session.check_out;
     const roomID = req.session.roomID;
-    console.log(roomID);
     const roomName = await roomNameByRoomID(roomID);
-    console.log(roomName);
     req.session.roomName = roomName;
 
-    console.log(startDate, endDate);
     roomRestrictionStore(startDate,endDate);
 
     res.render('reservation', {
@@ -36,7 +33,9 @@ export function post_reservation(req, res){
         "firstName":req.body.first_name,
         "lastName":req.body.last_name,
         "email":req.body.email,
-        "phone":req.body.phone
+        "phone":req.body.phone,
+        "check_in":req.session.check_in,
+        "check_out":req.session.check_out
     }
 
     req.session.reservationData = reservationData;
