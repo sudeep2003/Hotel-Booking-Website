@@ -1,26 +1,26 @@
 <div class="col-lg-4 col-md-6">
     <div class="room-item">
-        <img src="../img/room/room-1.jpg" alt="">
+        <img src=<%= Room.img_src %> alt="">
         <div class="ri-text">
-            <h4>Premium King Room</h4>
-            <h3>159$<span>/Pernight</span></h3>
+            <h4><%=Room.roomName%></h4>
+            <h3><%= Room.price %>$<span>/Pernight</span></h3>
             <table>
                 <tbody>
                     <tr>
                         <td class="r-o">Size:</td>
-                        <td>30 ft</td>
+                        <td><%= Room.Size %></td>
                     </tr>
                     <tr>
                         <td class="r-o">Capacity:</td>
-                        <td>Max persion 3</td>
+                        <td>Max persion <%= Room.Max_person %></td>
                     </tr>
                     <tr>
                         <td class="r-o">Bed:</td>
-                        <td>King Beds</td>
+                        <td><%= Room.Bed %></td>
                     </tr>
                     <tr>
                         <td class="r-o">Services:</td>
-                        <td>Wifi, Television, Bathroom,...</td>
+                        <td><%= Room.Services %></td>
                     </tr>
                 </tbody>
             </table>
@@ -28,3 +28,6 @@
         </div>
     </div>
 </div>
+<% for(let i=1; i<=6; i++) {%>
+    <%- include("./component/roomCard") %>
+    <% } %>

@@ -34,6 +34,12 @@ const RoomSchema = new mongoose.Schema({
     roomName:String,
     createdAt: Date,
     updatedAt:Date,
+    price:Number,
+    img_src:String,
+    Size:String,
+    Max_person: String,
+    Bed:String,
+    Services:String
 })
 
 const RestrictionSchema = new mongoose.Schema({
