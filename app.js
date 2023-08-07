@@ -10,6 +10,7 @@ import { reservation, post_reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
 import { choose_room } from "./controller/choose_room.js";
 import session from "express-session";
+import Rooms_content from "./Demo/DemoRooms2.js";
 
 const app = express();
 
@@ -29,7 +30,8 @@ app.get('/', index);
 app.post('/', post_index);
 
 app.get('/rooms', (req, res) => {
-    res.render('rooms');
+    const Rooms = Rooms_content()
+    res.render('rooms',{Rooms:Rooms});
 });
 
 app.get('/blog', (req, res) => {
