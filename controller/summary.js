@@ -1,45 +1,43 @@
-// const express = require("express");
 import express from 'express';
-import bodyParser from 'body-parser';
-import cookieSession from 'cookie-session';
-import roomRestrictionStore from '../database/roomrestrictions.js';
-import roomNameByRoomID from '../database/roomNameByRoomID.js';
+import reservationDataBase from '../database/reservations.js';
+// import { res1 } from '../models/templateData.js';
 
 const app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-
-export async function reservation(req, res){
+export function summary(req, res){
     console.log(req.session);
-    const startDate = req.session.check_in;
-    const endDate = req.session.check_out;
-    const roomID = req.session.roomID;
-    console.log(roomID);
-    const roomName = await roomNameByRoomID(roomID);
-    console.log(roomName);
-    req.session.roomName = roomName;
+    const reservationData = req.session.reservationData;
 
-    console.log(startDate, endDate);
-    roomRestrictionStore(startDate,endDate);
-
-    res.render('reservation', {
-        roomName: roomName,
-        startDate: startDate,
-        endDate: endDate
-    });
-}
-
-export function post_reservation(req, res){
-    const reservationData = {
-        "firstName":req.body.first_name,
-        "lastName":req.body.last_name,
-        "email":req.body.email,
-        "phone":req.body.phone
+    const roomName = req.session.roomName;
+    const reservation_summary_object = {
+        "firstName": reservationData.firstName,
+        "lastName": reservationData.lastName,
+        "email": reservationData.email,
+        "Phone": reservationData.phone,
+        "startDate": reservationData.check_in,
+        "endDate": reservationData.check_out,
+        "roomID": reservationData.roomID
     }
 
-    req.session.reservationData = reservationData;
+    const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;
 
-    res.redirect('/reservation-summary')
+    console.log(reservation_summary_object.roomID);
+
+    reservationDataBase(reservation_summary_object)
+
+    req.session.destroy((err)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log("Session is successfully destroyed.s");
+        }
+    })
+    res.render('reservation_summary',{
+        roomName: roomName,
+        Name: Name,
+        startDate: reservation_summary_object.startDate,
+        endDate: reservation_summary_object.endDate,
+        email: reservation_summary_object.email,
+        Phone: reservation_summary_object.Phone
+    });
 }
