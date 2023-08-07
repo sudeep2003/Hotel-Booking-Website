@@ -9,7 +9,7 @@ export function summary(req, res){
     const reservationData = req.session.reservationData;
 
     const roomName = req.session.roomName;
-    const res1 = {
+    const reservation_summary_object = {
         "firstName": reservationData.firstName,
         "lastName": reservationData.lastName,
         "email": reservationData.email,
@@ -18,11 +18,12 @@ export function summary(req, res){
         "endDate": reservationData.check_out,
         "roomID": reservationData.roomID
     }
-    const Name = `${firstName} ${lastName}`;
 
-    console.log(roomID);
+    const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;
 
-    reservationDataBase(res1)
+    console.log(reservation_summary_object.roomID);
+
+    reservationDataBase(reservation_summary_object)
 
     req.session.destroy((err)=>{
         if(err){
@@ -34,9 +35,9 @@ export function summary(req, res){
     res.render('reservation_summary',{
         roomName: roomName,
         Name: Name,
-        startDate: startDate,
-        endDate: endDate,
-        email: email,
-        Phone: Phone
+        startDate: reservation_summary_object.startDate,
+        endDate: reservation_summary_object.endDate,
+        email: reservation_summary_object.email,
+        Phone: reservation_summary_object.Phone
     });
 }
