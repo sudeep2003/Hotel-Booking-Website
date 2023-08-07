@@ -2,7 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
-import roomRestrictionStore from '../database/roomrestrictions.js';
+import roomRestrictionStore from '../database/roomRestrictionStore.js';
 import roomNameByRoomID from '../database/roomNameByRoomID.js';
 
 const app = express();

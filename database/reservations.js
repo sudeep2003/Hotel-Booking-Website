@@ -20,4 +20,8 @@ export default async function reservationDataBase(res1){
     });
 
     await reservation.save();
+
+    console.log(reservation._id)
+
+    return reservation._id;
 }

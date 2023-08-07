@@ -1,6 +1,7 @@
 import express from 'express';
 import reservationDataBase from '../database/reservations.js';
 import { reservation } from './reservation.js';
+import { roomRestrictionStore } from '../database/roomRestrictionStore.js';
 // import { res1 } from '../models/templateData.js';
 
 const app = express();
@@ -20,9 +21,19 @@ export function summary(req, res){
         "roomID": reservationData.roomID
     }
 
-    const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;
+    const reservationId = reservationDataBase(reservation_summary_object)
 
-    reservationDataBase(reservation_summary_object)
+    const roomRestriction = {
+        "startDate": reservationData.check_in,
+        "endDate": reservationData.check_out,
+        "roomId": reservationData.roomID,
+        "reservationId": reservationId,
+        "restrictionId": 1
+    }
+
+    roomRestrictionStore(roomRestriction)
+
+    const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;
 
     req.session.destroy((err)=>{
         if(err){
