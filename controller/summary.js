@@ -6,7 +6,7 @@ import roomRestrictionStore from '../database/roomrestrictions.js';
 
 const app = express();
 
-export function summary(req, res){
+export async function summary(req, res){
     console.log(req.session);
     const reservationData = req.session.reservationData;
 
@@ -21,7 +21,7 @@ export function summary(req, res){
         "roomID": reservationData.roomID
     }
 
-    const reservationId = reservationDataBase(reservation_summary_object)
+    const reservationId = await reservationDataBase(reservation_summary_object)
 
     const roomRestriction = {
         "startDate": reservationData.check_in,
