@@ -1,42 +1,45 @@
+// const express = require("express");
 import express from 'express';
-import reservationDataBase from '../database/reservations.js';
-// import { res1 } from '../models/templateData.js';
+import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
+import roomRestrictionStore from '../database/roomrestrictions.js';
+import roomNameByRoomID from '../database/roomNameByRoomID.js';
 
 const app = express();
 
-export function summary(req, res){
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+export async function reservation(req, res){
     console.log(req.session);
-    const reservationData = req.session.reservationData;
-
-    const roomName = req.session.roomName;
-    const res1 = {
-        "firstName": reservationData.firstName,
-        "lastName": reservationData.lastName,
-        "email": reservationData.email,
-        "Phone": reservationData.phone,
-        "startDate": reservationData.check_in,
-        "endDate": reservationData.check_out,
-        "roomID": reservationData.roomID
-    }
-    const Name = `${firstName} ${lastName}`;
-
+    const startDate = req.session.check_in;
+    const endDate = req.session.check_out;
+    const roomID = req.session.roomID;
     console.log(roomID);
+    const roomName = await roomNameByRoomID(roomID);
+    console.log(roomName);
+    req.session.roomName = roomName;
 
-    reservationDataBase(res1)
+    console.log(startDate, endDate);
+    roomRestrictionStore(startDate,endDate);
 
-    req.session.destroy((err)=>{
-        if(err){
-            console.log(err);
-        }else{
-            console.log("Session is successfully destroyed.s");
-        }
-    })
-    res.render('reservation_summary',{
+    res.render('reservation', {
         roomName: roomName,
-        Name: Name,
         startDate: startDate,
-        endDate: endDate,
-        email: email,
-        Phone: Phone
+        endDate: endDate
     });
+}
+
+export function post_reservation(req, res){
+    const reservationData = {
+        "firstName":req.body.first_name,
+        "lastName":req.body.last_name,
+        "email":req.body.email,
+        "phone":req.body.phone
+    }
+
+    req.session.reservationData = reservationData;
+
+    res.redirect('/reservation-summary')
 }
