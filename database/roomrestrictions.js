@@ -4,13 +4,13 @@ import {RoomRestriction} from '../models/models.js'
 
 const app = express();
 
-export default async function roomRestrictionStore(startDate,endDate){
+export default async function roomRestrictionStore(restriction){
     const roomRestriction = new RoomRestriction({
-        startDate: startDate,
-        endDate: endDate,
-        // roomId: Number,
-        // reservationId: Number,
-        // restrictionId: Number,
+        startDate: restriction.startDate,
+        endDate: restriction.endDate,
+        roomId: restriction.roomId,
+        reservationId: restriction.reservationId,
+        restrictionId: restriction.restrictionId,
         // createdAt: Date,
         // updatedAt: Date,
         // room: { type:Schema.Types.ObjectId, ref:'Room'},

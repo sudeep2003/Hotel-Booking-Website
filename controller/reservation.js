@@ -19,8 +19,6 @@ export async function reservation(req, res){
     const roomName = await roomNameByRoomID(roomID);
     req.session.roomName = roomName;
 
-    roomRestrictionStore(startDate,endDate);
-
     res.render('reservation', {
         roomName: roomName,
         startDate: startDate,

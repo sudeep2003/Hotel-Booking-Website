@@ -282,7 +282,7 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3>Your Reservation</h3>
-                        <form action="#">
+                        <form action="#" name="f1">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
                                 <input type="text" class="date-input" id="date-in">
@@ -305,7 +305,7 @@
                                     <option value="">1 Room</option>
                                 </select>
                             </div>
-                            <button type="submit">Check Availability</button>
+                            <button type="submit" name="b1">Check Availability</button>
                         </form>
                     </div>
                 </div>
@@ -391,4 +391,33 @@
         </div>
     </div>
     <!-- Search model end -->
+    <script>
+        // import {avsiro} from './avsiro.js';
+        import { availableSingleRoom } from "../database/roomsAvailable";
+        
+        const dateIn = document.getElementById('date-in');
+        const dateOut = document.getElementById('date-out');
+
+        // const bookNow = document.getElementById('b3');
+        
+        if (dateIn !== null && dateOut !== null) {
+            document.getElementById('b1').onclick = function(event){
+                event.preventDefault();
+                console.log('clicked');
+
+                let form = document.getElementById('f1');
+                let formData = new FormData(form);
+                formData.append("room_id", "1")
+
+                    const data = availableSingleRoom(5, dateIn, dateOut);
+
+                    if (data == true) {
+                        console.log("Done");
+                    } else {
+                        console.log("Not Done");
+                    };
+               
+            };
+        }
+    </script>
 <%- include("./partial/footer") %>

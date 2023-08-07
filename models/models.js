@@ -49,7 +49,7 @@ const ReservationSchema = new mongoose.Schema({
     phone: String,
     startDate: Date,
     endDate: Date,
-    roomId: Number,
+    roomId: String,
     createdAt: Date,
     updatedAt: Date,
     room: { type: Schema.Types.ObjectId, ref:'Room'},
