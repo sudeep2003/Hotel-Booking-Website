@@ -1,7 +1,7 @@
 import express from 'express';
 import reservationDataBase from '../database/reservations.js';
 import { reservation } from './reservation.js';
-import { roomRestrictionStore } from '../database/roomrestrictions.js';
+import roomRestrictionStore from '../database/roomrestrictions.js';
 // import { res1 } from '../models/templateData.js';
 
 const app = express();

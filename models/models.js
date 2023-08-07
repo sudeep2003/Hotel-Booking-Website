@@ -58,9 +58,9 @@ const ReservationSchema = new mongoose.Schema({
 const RoomRestrictionSchema= new mongoose.Schema({
     startDate: Date,
     endDate: Date,
-    roomId: Number,
-    reservationId: Number,
-    restrictionId: Number,
+    roomId: String,
+    reservationId: String,
+    restrictionId: String,
     createdAt: Date,
     updatedAt: Date,
     room: { type:Schema.Types.ObjectId, ref:'Room'},
