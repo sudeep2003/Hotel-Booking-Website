@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import rooms_type from './rooms.js';
 import { Room, RoomRestriction } from '../models/models.js';
+// import stringToDate from './StringToDate.js';
 
 const app = express();
 
@@ -43,7 +44,7 @@ const app = express();
 //         availableFrom: { $gte: arrivalDate },
 //         availableTo: { $lte: departureDate }
 //     });
-    
+
 //     if (availableSingleRoom) {
 //         // Item is available within the specified date range
 //         console.log(`${Single_room} is available.`);
@@ -69,21 +70,22 @@ const app = express();
 // }
 
 export async function availableRooms(arrivalDate, departureDate) {
+    console.log(arrivalDate,departureDate);
     let Unavailable_RoomRestriction;
     try {
         Unavailable_RoomRestriction = await RoomRestriction.find({
-            unavailableFrom: { $gte: arrivalDate },
-            unavailableTo: { $lte: departureDate }
+            startDate:{$gte:new Date(arrivalDate)},
+            endDate:{$lte:new Date(departureDate + 1)}
         });
     } catch (error) {
         console.error('Error fetching unavailable rooms:', error);
         throw error;
     }
-
+    console.log(Unavailable_RoomRestriction);
     let roomsData = [];
 
     const roomIds = Unavailable_RoomRestriction.map((restriction) => restriction.roomId);
-
+    console.log(roomIds);
     try {
         roomsData = await Room.find({ _id: { $nin: roomIds } });
     } catch (error) {
@@ -91,7 +93,7 @@ export async function availableRooms(arrivalDate, departureDate) {
         throw error;
     }
 
-    // console.log(roomsData);
+    console.log(roomsData);
     return roomsData;
 }
 
@@ -106,8 +108,8 @@ export async function availableSingleRoom(singleRoom,arrivalDate, departureDate)
     try{
         UnavailableSingleRoom = await RoomRestriction.find({
             roomName:singleRoom,
-            unavailableFrom: { $gte: arrivalDate },
-            unavailableTo: { $lte: departureDate }
+            startDate:{$gte:new Date(arrivalDate)},
+            endDate:{$lte:new Date(departureDate + 1)}
         });
     }catch(err){
         console.error('Error fetching unavailable rooms:', err);
