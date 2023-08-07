@@ -44,6 +44,10 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
+app.get('/room-details', (req, res) => {
+    res.render('room-details');
+});
+
 app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
 
