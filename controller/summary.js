@@ -15,13 +15,10 @@ export function summary(req, res){
         "email": reservationData.email,
         "Phone": reservationData.phone,
         "startDate": reservationData.check_in,
-        "endDate": reservationData.check_out,
-        "roomID": reservationData.roomID
+        "endDate": reservationData.check_out
     }
 
     const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;
-
-    console.log(reservation_summary_object.roomID);
 
     reservationDataBase(reservation_summary_object)
 

@@ -26,7 +26,6 @@ export async function post_index(req, res) {
     req.session.check_in = check_in;
     req.session.check_out = check_out;
     const rooms = await availableRooms(check_in,check_out);
-    console.log(rooms);
     res.render('choose_room', {rooms:rooms})
   }
 }
