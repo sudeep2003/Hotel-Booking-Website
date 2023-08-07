@@ -1,5 +1,6 @@
 import express from 'express';
 import reservationDataBase from '../database/reservations.js';
+import { reservation } from './reservation.js';
 // import { res1 } from '../models/templateData.js';
 
 const app = express();
@@ -15,7 +16,8 @@ export function summary(req, res){
         "email": reservationData.email,
         "Phone": reservationData.phone,
         "startDate": reservationData.check_in,
-        "endDate": reservationData.check_out
+        "endDate": reservationData.check_out,
+        "roomID": reservationData.roomID
     }
 
     const Name = `${reservation_summary_object.firstName} ${reservation_summary_object.lastName}`;

@@ -35,7 +35,8 @@ export function post_reservation(req, res){
         "email":req.body.email,
         "phone":req.body.phone,
         "check_in":req.session.check_in,
-        "check_out":req.session.check_out
+        "check_out":req.session.check_out,
+        "roomID":req.session.roomID
     }
 
     req.session.reservationData = reservationData;
