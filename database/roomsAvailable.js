@@ -91,7 +91,7 @@ export async function availableRooms(arrivalDate, departureDate) {
         throw error;
     }
 
-    console.log(roomsData);
+    // console.log(roomsData);
     return roomsData;
 }
 
@@ -100,7 +100,7 @@ export async function availableSingleRoom(singleRoom,arrivalDate, departureDate)
     // const Rooms_type = rooms_type();
     // const Single_room = singleRoom;
 
-    console.log(singleRoom)
+    // console.log(singleRoom)
 
     let UnavailableSingleRoom;
     try{

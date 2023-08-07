@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/
 export function choose_room(req, res) {
 
   var roomID = req.params.id;
-  console.log(roomID);
   req.session.roomID = roomID;
   res.redirect('/reservation')
 }

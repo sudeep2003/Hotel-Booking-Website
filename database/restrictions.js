@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import {Restriction} from '../models/models'
+import {Restriction} from '../models/models.js'
 
 const app = express();
 
