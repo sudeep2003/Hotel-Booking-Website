@@ -282,15 +282,15 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3>Your Reservation</h3>
-                        <form action="#" name="f1">
+                        <form action="#" name="f1" method="post">
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <input type="text" class="date-input" id="date-in" name="start">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <input type="text" class="date-input" id="date-out" name="end">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="select-option">
@@ -392,32 +392,35 @@
     </div>
     <!-- Search model end -->
     <script>
-        // import {avsiro} from './avsiro.js';
-        import { availableSingleRoom } from "../database/roomsAvailable";
-        
-        const dateIn = document.getElementById('date-in');
-        const dateOut = document.getElementById('date-out');
+        window.onload = function() {
+            const dateIn = document.getElementById('date-in');
+            const dateOut = document.getElementById('date-out');
+            const b1 = document.getElementById('b1');
+            
+            if (dateIn !== null && dateOut !== null) {
+                b1.onclick = function(event){
+                    event.preventDefault();
+                    console.log('clicked');
 
-        // const bookNow = document.getElementById('b3');
-        
-        if (dateIn !== null && dateOut !== null) {
-            document.getElementById('b1').onclick = function(event){
-                event.preventDefault();
-                console.log('clicked');
+                    let form = document.getElementById('f1');
+                    let formData = new FormData(form);
+                    formData.append("room_id", "1")
 
-                let form = document.getElementById('f1');
-                let formData = new FormData(form);
-                formData.append("room_id", "1")
+                    fetch('/availability-json', {
+                        method: 'post',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
 
-                    const data = availableSingleRoom(5, dateIn, dateOut);
-
-                    if (data == true) {
-                        console.log("Done");
-                    } else {
-                        console.log("Not Done");
-                    };
-               
-            };
-        }
+                        if (data.ok) {
+                            console.log('success');
+                        } else {
+                            console.log('failed');
+                        }});
+                
+                };
+            }
+        };
     </script>
 <%- include("./partial/footer") %>

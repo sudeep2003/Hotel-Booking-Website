@@ -10,6 +10,7 @@ import { reservation, post_reservation } from './controller/reservation.js';
 import { summary } from "./controller/summary.js";
 import { choose_room } from "./controller/choose_room.js";
 import session from "express-session";
+import { check } from "./controller/check.js";
 
 const app = express();
 
@@ -53,6 +54,8 @@ app.post('/reservation', post_reservation);
 
 app.get('/reservation-summary', summary);
 app.get('/choose-room/:id', choose_room);
+
+app.post('/availability-json', check);
 
 app.listen(process.env.PORT,()=>{
     console.log("This is running on port 3000.");
