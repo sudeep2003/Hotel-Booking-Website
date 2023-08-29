@@ -11,6 +11,7 @@ import { summary } from "./controller/summary.js";
 import { choose_room } from "./controller/choose_room.js";
 import session from "express-session";
 import { check } from "./controller/check.js";
+import { post_room_details, room_details } from "./controller/room_details.js";
 
 const app = express();
 
@@ -45,9 +46,8 @@ app.get('/about-us', (req, res) => {
     res.render('about-us');
 });
 
-app.get('/room-details', (req, res) => {
-    res.render('room-details');
-});
+app.get('/room-details', room_details);
+app.post('/room-details', post_room_details);
 
 app.get('/reservation', reservation);
 app.post('/reservation', post_reservation);
