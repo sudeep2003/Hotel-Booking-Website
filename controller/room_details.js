@@ -8,7 +8,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 export function room_details(req, res){
-    res.render('room-details');
+    res.render('room-details', {a: ""});
 }
 
 // export function post_room_details(req, res){
@@ -32,9 +32,13 @@ export function post_room_details(req, res){
     let A = '';
     if (availableSingleRoom("Premium King Room", startDate, endDate)) {
         A = "Room Available";
+        console.log(A);
+        res.render('room-details', { a: A });
     } else {
         A = "Room Not Available";
+        console.log(A);
+        res.render('room-details', { a: A });
     }
-    console.log(A);
-    res.render('room-details', { a: A });
+    // console.log(A);
+    // res.render('room-details', { a: A });
 }
